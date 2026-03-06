@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Admin Dashboard - All Orders</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .vuln {
+            color: red;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/">Back to Home</a>
+    <h2>Admin Dashboard - All Orders</h2>
+
+    <table th:unless="${orders.isEmpty()}">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>CC Number (VULNERABLE)</th>
+                <th>Expiry</th>
+                <th>CVV</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${order.user.username}"></td>
+                <td th:text="${#calendars.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${order.status}"></td>
+                <td th:text="${'$' + order.totalAmount}"></td>
+                <!-- VULNERABILITY: Displaying plaintext CC data -->
+                <td class="vuln" th:text="${order.creditCardNumber}"></td>
+                <td class="vuln" th:text="${order.expiry}"></td>
+                <td class="vuln" th:text="${order.cvv}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Checkout - Storefront</title>
+</head>
+
+<body>
+    <a href="/cart">Back to Cart</a>
+    <h2>Checkout</h2>
+
+    <form action="/checkout" method="post">
+        <h3>Shipping Information</h3>
+        <div>
+            <label>Full Name:</label>
+            <input type="text" name="fullName" th:value="${user.name}" required>
+        </div>
+        <div>
+            <label>Address:</label>
+            <textarea name="address" required></textarea>
+        </div>
+
+        <h3>Payment Details (VULNERABLE)</h3>
+        <!-- VULNERABILITY: Sent over HTTP and stored in plaintext -->
+        <p style="color:red; font-size: 0.8em;">Note: This is an intentionally insecure training app.</p>
+        <div>
+            <label>Credit Card Number (16 digits):</label>
+            <input type="text" name="creditCardNumber" pattern="\d{16}" title="16 numeric digits" required>
+        </div>
+        <div>
+            <label>Expiry (MM/YY):</label>
+            <input type="text" name="expiry" pattern="\d{2}/\d{2}" placeholder="MM/YY" required>
+        </div>
+        <div>
+            <label>CVV:</label>
+            <input type="text" name="cvv" pattern="\d{3,4}" required>
+        </div>
+
+        <button type="submit"
+            style="margin-top:20px; padding: 10px; background-color: #28a745; color: white; border: none; cursor:pointer;">Place
+            Order</button>
+    </form>
+</body>
+
+</html>

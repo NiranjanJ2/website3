@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Profile - Storefront</title>
+</head>
+
+<body>
+    <a href="/">Back to Home</a>
+    <h2>Profile</h2>
+    <p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
+    <p><strong>Name:</strong> <span th:text="${user.name}"></span></p>
+    <p><strong>Role:</strong> <span th:text="${user.role}"></span></p>
+    <a href="/logout">Logout</a>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Cart - Storefront</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/">Continue Shopping</a>
+    <h2>Your Cart</h2>
+
+    <div th:if="${cart.isEmpty()}">
+        <p>Your cart is empty.</p>
+    </div>
+
+    <div th:unless="${cart.isEmpty()}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product : ${cart}">
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${'$' + product.price}"></td>
+                    <td>
+                        <form action="/cart/remove" method="post">
+                            <input type="hidden" name="productId" th:value="${product.id}">
+                            <button type="submit">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Total: <span th:text="${'$' + total}"></span></h3>
+        <a href="/checkout"
+            style="display:inline-block; padding: 10px; background-color: #007bff; color: white; text-decoration: none;">Proceed
+            to Checkout</a>
+    </div>
+
+</body>
+
+</html>
