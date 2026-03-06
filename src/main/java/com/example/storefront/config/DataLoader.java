@@ -55,18 +55,33 @@ public class DataLoader implements CommandLineRunner {
                     "Laptop", "Smartphone", "Headphones", "Monitor", "Keyboard", "Mouse",
                     "Tablet", "Smartwatch", "Camera", "Microphone", "Speaker", "Router"
             };
-            Double[] prices = { 999.99, 699.99, 199.99, 299.99, 89.99, 49.99, 399.99, 249.99, 549.99, 129.99, 149.99,
-                    99.99 };
+            Double[] prices = { 1299.99, 799.99, 299.99, 349.99, 129.99, 79.99, 499.99, 399.99, 899.99, 159.99, 199.99,
+                    149.99 };
             String[] categories = { "Computers", "Phones", "Audio", "Monitors", "Accessories", "Accessories", "Tablets",
                     "Wearables", "Cameras", "Audio", "Audio", "Networking" };
+            String[] imageUrls = {
+                    "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-150574042ea18-1c99a0788675?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1608156639585-b3a034ef9199?q=80&w=800&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop"
+            };
 
             for (int i = 0; i < 12; i++) {
                 Product p = new Product();
                 p.setName(names[i]);
-                p.setDescription("High quality " + names[i]);
+                p.setDescription(
+                        "Professional grade " + names[i] + " with cutting-edge features and premium build quality.");
                 p.setPrice(prices[i]);
                 p.setCategory(categories[i]);
-                p.setImageUrl("https://via.placeholder.com/150");
+                p.setImageUrl(imageUrls[i]);
                 productRepository.save(p);
             }
 
