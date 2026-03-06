@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | Storefront</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="nav-logo">Storefront</a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Catalog</a>
+            <a href="/cart" class="nav-link active">Cart</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Your Shopping Cart</h1>
+
+        <div th:if="${cart == null or cart.isEmpty()}" style="text-align: center; padding: 4rem;">
+            <p class="nav-link" style="font-size: 1.25rem;">Your cart is empty.</p>
+            <a href="/" class="btn btn-primary" style="margin-top: 1rem;">Go Shopping</a>
+        </div>
+
+        <div th:if="${cart != null and !cart.isEmpty()}" class="checkout-grid">
+            <div class="cart-items">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="product : ${cart}">
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 1rem;">
+                                        <img th:src="${product.imageUrl}"
+                                            style="width: 48px; hieght: 48px; border-radius: 0.5rem; object-fit: cover;">
+                                        <span th:text="${product.name}" style="font-weight: 500;"></span>
+                                    </div>
+                                </td>
+                                <td th:text="${'$' + product.price}">$0.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a href="/" class="btn btn-outline">Keep Shopping</a>
+            </div>
+
+            <div class="checkout-summary">
+                <div class="summary-card">
+                    <h3>Order Summary</h3>
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span th:text="${'$' + total}">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span style="color: var(--success);">Free</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total</span>
+                        <span th:text="${'$' + total}">$0.00</span>
+                    </div>
+                    <a href="/checkout" class="btn btn-primary btn-block"
+                        style="padding: 1rem; margin-top: 1rem;">Proceed to Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

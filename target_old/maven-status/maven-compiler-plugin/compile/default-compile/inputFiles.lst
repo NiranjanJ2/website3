@@ -1,0 +1,16 @@
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/models/Order.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/models/User.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/services/OrderService.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/controllers/AdminController.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/controllers/ProductController.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/repositories/ProductRepository.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/models/Product.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/repositories/OrderRepository.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/controllers/OrderController.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/services/UserService.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/controllers/AuthController.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/services/ProductService.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/controllers/CartController.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/StorefrontApplication.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/repositories/UserRepository.java
+/Users/niranjanj/Desktop/ucla/website3/src/main/java/com/example/storefront/config/DataLoader.java

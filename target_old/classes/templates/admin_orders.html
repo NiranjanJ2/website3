@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - All Orders</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<body>
+
+    <nav class="navbar" style="background: #1e293b; color: white; border: none;">
+        <a href="/" class="nav-logo" style="color: white;">Storefront Admin</a>
+        <div class="nav-links">
+            <a href="/" class="nav-link" style="color: #94a3b8;">Frontend</a>
+            <a href="/logout" class="btn btn-danger" style="font-size: 0.75rem;">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header-section" style="margin-bottom: 3rem;">
+            <h1 style="color: #ef4444;">Admin Dashboard: Order Management</h1>
+            <div class="vuln-badge" style="background: rgba(239, 68, 68, 0.1);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    style="display: inline; vertical-align: middle; margin-right: 0.5rem;">
+                    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+                    <path d="M12 9v4" />
+                    <path d="M12 17h.01" />
+                </svg>
+                CRITICAL DATA EXPOSURE DETECTED
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th style="color: #ef4444;">CC Number (UNENCRYPTED)</th>
+                        <th style="color: #ef4444;">Expiry</th>
+                        <th style="color: #ef4444;">CVV</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.id}">1</td>
+                        <td th:text="${order.user.username}">user</td>
+                        <td th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}">Date</td>
+                        <td th:text="${'$' + order.totalAmount}">$0.00</td>
+                        <!-- VULNERABILITY: Displaying plaintext CC data -->
+                        <td class="vuln-text" th:text="${order.creditCardNumber}">CC</td>
+                        <td class="vuln-text" th:text="${order.expiry}">Exp</td>
+                        <td class="vuln-text" th:text="${order.cvv}">CVV</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div
+            style="background: #fef2f2; border: 1px solid #fee2e2; border-radius: 0.75rem; padding: 1.5rem; margin-top: 2rem;">
+            <h3 style="color: #991b1b; display: flex; align-items: center; gap: 0.5rem;">
+                Security Note
+            </h3>
+            <p style="color: #b91c1c; font-size: 0.875rem;">
+                This administrative view exposes full Payment Card Industry (PCI) data in plaintext. This is a severe
+                compliance violation.
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>

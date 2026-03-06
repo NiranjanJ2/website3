@@ -24,7 +24,7 @@ Run the application using the Spring Boot Maven Plugin:
 mvn spring-boot:run
 ```
 
-The app will be available at `http://localhost:8080`.
+The app will be available at `http://localhost:5020`.
 
 ### Initial Seed Data
 The `DataLoader` creates the following default users:

@@ -2,29 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Register - Storefront</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Storefront</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 
-<body>
-    <h2>Register</h2>
-    <p style="color:red;" th:if="${error}" th:text="${error}"></p>
-    <form action="/register" method="post" th:object="${user}">
-        <div>
-            <label>Username:</label>
-            <input type="text" name="username" th:field="*{username}" required>
+<body
+    style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+
+    <div class="auth-form" style="margin: 0;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h2 style="color: var(--primary);">Join Us</h2>
+            <p class="nav-link">Create your shopping profile</p>
         </div>
-        <div>
-            <label>Password:</label>
-            <!-- VULNERABILITY: Sent over HTTP -->
-            <input type="password" name="password" th:field="*{password}" required>
+
+        <form action="/register" method="post">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" class="form-control" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" placeholder="johndoe" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                <small class="vuln-text" style="font-size: 0.7rem;">Vulnerability: Hashed with MD5</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" style="padding: 0.75rem;">Register</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <p class="nav-link">Already have an account? <a href="/login"
+                    style="color: var(--primary); font-weight: 600;">Login</a></p>
         </div>
-        <div>
-            <label>Full Name:</label>
-            <input type="text" name="name" th:field="*{name}" required>
-        </div>
-        <button type="submit">Register</button>
-    </form>
-    <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+
 </body>
 
 </html>

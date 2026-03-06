@@ -2,44 +2,87 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Checkout - Storefront</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Storefront</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 
 <body>
-    <a href="/cart">Back to Cart</a>
-    <h2>Checkout</h2>
 
-    <form action="/checkout" method="post">
-        <h3>Shipping Information</h3>
-        <div>
-            <label>Full Name:</label>
-            <input type="text" name="fullName" th:value="${user.name}" required>
-        </div>
-        <div>
-            <label>Address:</label>
-            <textarea name="address" required></textarea>
-        </div>
+    <nav class="navbar">
+        <a href="/" class="nav-logo">Storefront</a>
+    </nav>
 
-        <h3>Payment Details (VULNERABLE)</h3>
-        <!-- VULNERABILITY: Sent over HTTP and stored in plaintext -->
-        <p style="color:red; font-size: 0.8em;">Note: This is an intentionally insecure training app.</p>
-        <div>
-            <label>Credit Card Number (16 digits):</label>
-            <input type="text" name="creditCardNumber" pattern="\d{16}" title="16 numeric digits" required>
-        </div>
-        <div>
-            <label>Expiry (MM/YY):</label>
-            <input type="text" name="expiry" pattern="\d{2}/\d{2}" placeholder="MM/YY" required>
-        </div>
-        <div>
-            <label>CVV:</label>
-            <input type="text" name="cvv" pattern="\d{3,4}" required>
-        </div>
+    <div class="container">
+        <h1>Checkout</h1>
 
-        <button type="submit"
-            style="margin-top:20px; padding: 10px; background-color: #28a745; color: white; border: none; cursor:pointer;">Place
-            Order</button>
-    </form>
+        <div class="checkout-grid">
+            <div class="checkout-form-section">
+                <form action="/checkout" method="post">
+                    <section style="margin-bottom: 3rem;">
+                        <h2>1. Shipping Details</h2>
+                        <div class="table-container" style="padding: 2rem; border-style: dashed;">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" name="fullName" class="form-control" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Shipping Address</label>
+                                <input type="text" name="address" class="form-control"
+                                    placeholder="123 Main St, Tech City" required>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 2rem;">
+                        <h2>2. Payment Information</h2>
+                        <div class="vuln-badge">
+                            Vulnerability: Storing Credit Card in Plaintext
+                        </div>
+                        <div class="table-container" style="padding: 2rem; border-color: var(--accent);">
+                            <div class="form-group">
+                                <label>Card Number</label>
+                                <input type="text" name="creditCardNumber" class="form-control"
+                                    placeholder="1111222233334444" pattern="\d{16}" title="16 digits required" required>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label>Expiry Date</label>
+                                    <input type="text" name="expiry" class="form-control" placeholder="MM/YY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>CVV</label>
+                                    <input type="text" name="cvv" class="form-control" placeholder="123" required>
+                                </div>
+                            </div>
+                            <small class="vuln-text">No PCI DSS compliance detected.</small>
+                        </div>
+                    </section>
+
+                    <button type="submit" class="btn btn-primary btn-block"
+                        style="padding: 1.25rem; font-size: 1.25rem;">Place Secure Order</button>
+                </form>
+            </div>
+
+            <div class="checkout-summary">
+                <div class="summary-card">
+                    <h3>Order Info</h3>
+                    <div class="summary-row">
+                        <span class="nav-link">Items:</span>
+                        <span th:text="${cart.size()}">0</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total Amount</span>
+                        <span th:text="${'$' + total}">$0.00</span>
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">By placing an order, you
+                        agree to our terms of service.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

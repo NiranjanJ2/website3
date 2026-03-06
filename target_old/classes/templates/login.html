@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Storefront</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<body
+    style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+
+    <div class="auth-form" style="margin: 0;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h2 style="color: var(--primary);">Welcome Back</h2>
+            <p class="nav-link">Log in to your account</p>
+        </div>
+
+        <div class="vuln-badge" th:if="${error}">
+            <span th:text="${error}"></span>
+        </div>
+
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" placeholder="admin" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                <small class="vuln-text" style="font-size: 0.7rem;">Vulnerability: Sent over HTTP</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" style="padding: 0.75rem;">Login</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <p class="nav-link">Don't have an account? <a href="/register"
+                    style="color: var(--primary); font-weight: 600;">Register</a></p>
+        </div>
+    </div>
+
+</body>
+
+</html>

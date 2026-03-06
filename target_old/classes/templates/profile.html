@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Storefront</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="nav-logo">Storefront</a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Catalog</a>
+            <a href="/profile" class="nav-link active">Profile</a>
+            <a href="/logout" class="btn btn-outline">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Your Profile</h1>
+
+        <div class="profile-card">
+            <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem;">
+                <div
+                    style="width: 80px; height: 80px; border-radius: 999px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 700;">
+                    <span th:text="${user.name.substring(0,1)}">U</span>
+                </div>
+                <div>
+                    <h2 th:text="${user.name}" style="margin: 0;">User Name</h2>
+                    <p class="nav-link" th:text="'@' + ${user.username}"></p>
+                </div>
+            </div>
+
+            <div class="profile-info">
+                <span class="info-label">Account ID:</span>
+                <span th:text="${user.id}">1</span>
+
+                <span class="info-label">Role:</span>
+                <span class="btn btn-outline" style="padding: 0.1rem 0.5rem; font-size: 0.7rem; cursor: default;"
+                    th:text="${user.role}">USER</span>
+
+                <span class="info-label">Security:</span>
+                <span class="vuln-text">MD5 Password Storage</span>
+            </div>
+
+            <div
+                style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; gap: 1rem;">
+                <a href="/orders" class="btn btn-primary">View Past Orders</a>
+                <a href="/" class="btn btn-outline">Back to Catalog</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
